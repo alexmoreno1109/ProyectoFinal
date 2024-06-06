@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Remoto</title>
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #arm {
+            text-align: center;
+            margin-top: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .button-container a {
+            text-decoration: none;
+            margin: 5px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            background-color: #ccc;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #ddd;
+        }
+        .button.stop {
+            background-color: red;
+            color: white;
+        }
+    </style>
+    <script>
+        function sendRequest(params) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("Response received");
+                }
+            };
+            xhttp.open("GET", params, true);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <div id="arm">
+        <h1>Jaider Soto, Jhon Moreno, Joshua</h1>
+        <p>Control Remoto</p>
+        <p>Valor ADC: {adc_value}</p> <!-- Marcador de posición -->
+        <div class="button-container">
+            <button onclick="sendRequest('?motor=forward')" class="button">↑</button>
+        </div>
+        <div class="button-container">
+            <button onclick="sendRequest('?left=hard')" class="button">←</button>
+            <button onclick="sendRequest('?motor=stop')" class="button stop">STOP</button>
+            <button onclick="sendRequest('?rigth=hard')" class="button">→</button>
+        </div>
+        <div class="button-container">
+            <button onclick="sendRequest('?left=left')" class="button">↖</button>
+            <button onclick="sendRequest('?rigth=rigth')" class="button">↗</button>
+        </div>
+        <div class="button-container">
+            <button onclick="sendRequest('?motor=backward')" class="button">Back</button>
+        </div>
+        <div class="button-container">
+            <button onclick="sendRequest('?quite=quite')" class="button">Quit</button>
+        </div>
+    </div>
+</body>
+</html>
